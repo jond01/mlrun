@@ -4050,9 +4050,9 @@ tifffile==2024.8.30 ; python_full_version < '3.10' \
     --hash=sha256:2c9508fe768962e30f87def61819183fb07692c258cb175b3c114828368485a4 \
     --hash=sha256:8bc59a8f02a2665cd50a910ec64961c5373bee0b8850ec89d3b7b485bf7be7ad
     # via scikit-image
-tifffile==2025.3.13 ; python_full_version >= '3.10' \
-    --hash=sha256:10f205b923c04678f744a6d553f6f86c639c9ba6e714f6758d81af0678ba75dc \
-    --hash=sha256:30fcc4584216937b5993d0568452b6fea8e12e61f9afb1a8e967c07c281faa06
+tifffile==2025.3.30 ; python_full_version >= '3.10' \
+    --hash=sha256:0ed6eee7b66771db2d1bfc42262a51b01887505d35539daef118f4ff8c0f629c \
+    --hash=sha256:3cdee47fe06cd75367c16bc3ff34523713156dae6cd498e3a392e5b39a51b789
     # via scikit-image
 tinycss2==1.4.0 \
     --hash=sha256:10c0972f6fc0fbee87c3edb76549357415e94548c1ae10ebccdea16fb404a9b7 \
