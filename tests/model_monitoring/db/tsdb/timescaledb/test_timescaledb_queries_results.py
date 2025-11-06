@@ -58,9 +58,9 @@ class TestResultsQueries:
             """
         )
 
-        assert (
-            len(query_result.data) == 1
-        ), "Expected to find exactly 1 inserted result record"
+        assert len(query_result.data) == 1, (
+            "Expected to find exactly 1 inserted result record"
+        )
 
         # Verify the data matches what we inserted
         row = query_result.data[0]
@@ -90,9 +90,9 @@ class TestResultsQueries:
         test_endpoint_rows = metadata_result[
             metadata_result["endpoint_id"] == "test_endpoint_1"
         ]
-        assert (
-            len(test_endpoint_rows) == 1
-        ), "Should find exactly 1 metadata record for the endpoint"
+        assert len(test_endpoint_rows) == 1, (
+            "Should find exactly 1 metadata record for the endpoint"
+        )
 
     def test_get_results_metadata(self, query_test_helper):
         """Test get_results_metadata method."""
@@ -227,12 +227,12 @@ class TestResultsQueries:
         }
 
         for expected_key, expected_count in expected_results.items():
-            assert (
-                expected_key in result
-            ), f"Expected key {expected_key} should be in result"
-            assert (
-                result[expected_key] == expected_count
-            ), f"Expected {expected_count} for {expected_key}, got {result[expected_key]}"
+            assert expected_key in result, (
+                f"Expected key {expected_key} should be in result"
+            )
+            assert result[expected_key] == expected_count, (
+                f"Expected {expected_count} for {expected_key}, got {result[expected_key]}"
+            )
 
     def test_get_drift_data(self, query_test_helper):
         """Test get_drift_data method with comprehensive drift scenarios."""
@@ -304,9 +304,9 @@ class TestResultsQueries:
 
         # Verify the data structure contains _DriftBin objects
         for drift_bin in result.values:
-            assert (
-                drift_bin.timestamp is not None
-            ), "Expected drift_bin to have timestamp"
+            assert drift_bin.timestamp is not None, (
+                "Expected drift_bin to have timestamp"
+            )
 
             # Verify timestamp is within our query range - we know the exact format from our data
             # Timestamps should be timezone-aware datetime objects from TimescaleDB
@@ -330,9 +330,9 @@ class TestResultsQueries:
         actual_total_suspected = sum(bin.count_suspected for bin in result.values)
         actual_total_detected = sum(bin.count_detected for bin in result.values)
 
-        assert (
-            actual_total_suspected == expected_total_suspected
-        ), f"Expected {expected_total_suspected} suspected, got {actual_total_suspected}"
-        assert (
-            actual_total_detected == expected_total_detected
-        ), f"Expected {expected_total_detected} detected, got {actual_total_detected}"
+        assert actual_total_suspected == expected_total_suspected, (
+            f"Expected {expected_total_suspected} suspected, got {actual_total_suspected}"
+        )
+        assert actual_total_detected == expected_total_detected, (
+            f"Expected {expected_total_detected} detected, got {actual_total_detected}"
+        )

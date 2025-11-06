@@ -160,7 +160,7 @@ class TimescaleDBOperationsManager:
         placeholders = ", ".join(["%s"] * len(columns))
 
         insert_sql = f"""
-            INSERT INTO {table.full_name()} ({', '.join(columns)})
+            INSERT INTO {table.full_name()} ({", ".join(columns)})
             VALUES ({placeholders})
         """
 
@@ -327,12 +327,12 @@ class TimescaleDBOperationsManager:
                 FROM information_schema.tables
                 WHERE table_schema = %s
                 AND table_type = 'BASE TABLE'
-                AND ({' OR '.join(pattern_conditions)})
+                AND ({" OR ".join(pattern_conditions)})
                 UNION
                 SELECT matviewname as table_name
                 FROM pg_matviews
                 WHERE schemaname = %s
-                AND ({' OR '.join(view_pattern_conditions)})
+                AND ({" OR ".join(view_pattern_conditions)})
                 ORDER BY table_name
                 """,
                 tuple([schema_name] + parameters[1:] + view_parameters[1:]),
@@ -421,7 +421,7 @@ class TimescaleDBOperationsManager:
                 FROM information_schema.tables
                 WHERE table_schema = %s
                 AND table_type = 'BASE TABLE'
-                AND ({' OR '.join(pattern_conditions)})
+                AND ({" OR ".join(pattern_conditions)})
                 ORDER BY table_name
                 """,
                 tuple([schema_name] + parameters[1:]),
@@ -442,7 +442,7 @@ class TimescaleDBOperationsManager:
                 SELECT view_name as table_name
                 FROM timescaledb_information.continuous_aggregates
                 WHERE view_schema = %s
-                AND ({' OR '.join(view_pattern_conditions)})
+                AND ({" OR ".join(view_pattern_conditions)})
                 ORDER BY view_name
                 """,
                 tuple(view_parameters),
