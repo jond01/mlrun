@@ -476,7 +476,7 @@ class TimescaleDBQueryBuilder:
 
         return f"""
         SELECT
-            {', '.join(select_columns)}
+            {", ".join(select_columns)}
         FROM ({subquery}) AS time_buckets
         GROUP BY {group_by_column}
         ORDER BY {order_by_column}

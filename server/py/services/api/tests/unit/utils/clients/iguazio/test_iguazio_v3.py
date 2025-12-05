@@ -1061,9 +1061,9 @@ def _verify_request_cookie(headers: dict, session: str):
         f'{mlrun.common.schemas.CookieNames.iguazio}=j:{{"sid": "{session}"}}'
     )
     if cookie_header := set(headers.keys()).intersection({"Cookie", "cookie"}):
-        assert (
-            headers.get(list(cookie_header)[0]) == expected_session_value
-        ), cookie_header
+        assert headers.get(list(cookie_header)[0]) == expected_session_value, (
+            cookie_header
+        )
     elif mlrun.common.schemas.HeaderNames.cookies in headers:
         # in async client we get the `cookies` key while it contains the cookies in form of a dict
         # use requests to construct it back to a string as expected above

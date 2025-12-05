@@ -1048,14 +1048,12 @@ class TDEngineConnector(TSDBConnector):
         if df_results.empty and df_metrics.empty:
             return metric_list
 
-        def build_metric_objects() -> (
-            list[
-                Union[
-                    mm_schemas.ApplicationResultRecord,
-                    mm_schemas.ApplicationMetricRecord,
-                ]
+        def build_metric_objects() -> list[
+            Union[
+                mm_schemas.ApplicationResultRecord,
+                mm_schemas.ApplicationMetricRecord,
             ]
-        ):
+        ]:
             metric_objects = []
             if not df_results.empty:
                 df_results.rename(
