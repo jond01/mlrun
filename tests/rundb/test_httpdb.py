@@ -227,9 +227,9 @@ def test_api_boot_speed(create_server):
         end_time = time.perf_counter()
         runs.append(end_time - start_time)
     avg_run_time = sum(runs) / run_times
-    assert (
-        avg_run_time <= expected_time
-    ), "Seems like a performance hit on creating api server"
+    assert avg_run_time <= expected_time, (
+        "Seems like a performance hit on creating api server"
+    )
 
 
 def test_run(create_server):
@@ -731,9 +731,9 @@ def test_remove_labels_from_feature_set(create_server):
     feature_sets = db.list_feature_sets(project=project)
     assert len(feature_sets) == 1, "bad number of feature sets"
     assert len(feature_sets[0].metadata.labels) == 2, "bad number of labels"
-    assert (
-        feature_sets[0].metadata.labels == feature_set["metadata"]["labels"]
-    ), "labels were not set correctly"
+    assert feature_sets[0].metadata.labels == feature_set["metadata"]["labels"], (
+        "labels were not set correctly"
+    )
 
     feature_set = feature_sets[0]
     feature_set.metadata.labels = {}
@@ -1099,9 +1099,9 @@ def test_feature_vectors(create_server):
     assert len(feature_vectors) == count, "bad list results - wrong number of members"
 
     feature_vector = db.get_feature_vector(name, project)
-    assert (
-        len(feature_vector.spec.features) == 5
-    ), "Features didn't get updated properly"
+    assert len(feature_vector.spec.features) == 5, (
+        "Features didn't get updated properly"
+    )
 
     # Create a feature-vector that has no labels
     name = "feature_vector_no_labels"
@@ -1119,9 +1119,9 @@ def test_feature_vectors(create_server):
         patch_mode=mlrun.common.schemas.PatchMode.replace,
     )
     feature_vector = db.get_feature_vector(name, project)
-    assert (
-        len(feature_vector.spec.features) == 2
-    ), "Features didn't get updated properly"
+    assert len(feature_vector.spec.features) == 2, (
+        "Features didn't get updated properly"
+    )
 
 
 def test_project_sql_db_roundtrip(create_server):
@@ -1342,9 +1342,9 @@ def _generate_project_and_artifact(project: str = "newproj", tag: Optional[str] 
 
 def _assert_artifacts(db, project: str, tag: str, expected_count: int):
     artifacts = db.list_artifacts(project=project, tag=tag)
-    assert (
-        len(artifacts) == expected_count
-    ), "bad list results - wrong number of artifacts"
+    assert len(artifacts) == expected_count, (
+        "bad list results - wrong number of artifacts"
+    )
 
 
 def _configure_run_db_server(create_server):

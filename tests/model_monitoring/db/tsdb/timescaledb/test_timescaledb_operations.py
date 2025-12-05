@@ -91,9 +91,9 @@ class TestTimescaleDBOperationsManagerIntegration:
 
         result = connection.run(query=query)
         actual_count = result.data[0][0]
-        assert (
-            actual_count == expected_count
-        ), f"Expected {expected_count} records, got {actual_count}"
+        assert actual_count == expected_count, (
+            f"Expected {expected_count} records, got {actual_count}"
+        )
         return result.data
 
     @staticmethod
@@ -629,9 +629,9 @@ class TestTimescaleDBOperationsManagerIntegration:
         )
         record_count = result.data[0][0]
         expected_min = len(results)  # At least 1 record per successful worker
-        assert (
-            record_count >= expected_min
-        ), f"Expected at least {expected_min} records, got {record_count}"
+        assert record_count >= expected_min, (
+            f"Expected at least {expected_min} records, got {record_count}"
+        )
 
     def test_aggregate_deletion_statements_generation(self, query_test_helper):
         """Test generation of aggregate deletion statements for endpoint cleanup."""
@@ -675,9 +675,9 @@ class TestTimescaleDBOperationsManagerIntegration:
                 application_name="", endpoint_ids=test_endpoints
             )
         )
-        assert isinstance(
-            empty_app_statements, list
-        ), "Should handle empty application name"
+        assert isinstance(empty_app_statements, list), (
+            "Should handle empty application name"
+        )
 
         # Should handle empty endpoint list gracefully
         empty_endpoints_statements = (
@@ -685,9 +685,9 @@ class TestTimescaleDBOperationsManagerIntegration:
                 application_name=test_application, endpoint_ids=[]
             )
         )
-        assert isinstance(
-            empty_endpoints_statements, list
-        ), "Should handle empty endpoint list"
+        assert isinstance(empty_endpoints_statements, list), (
+            "Should handle empty endpoint list"
+        )
 
         # Cleanup
         operations_handler.delete_tsdb_resources()
@@ -713,13 +713,13 @@ class TestTimescaleDBOperationsManagerIntegration:
         SELECT table_name FROM information_schema.tables
         WHERE table_schema = '{schema_name}'
         AND table_type = 'BASE TABLE'
-        AND table_name LIKE '%{project_id.replace('-', '_')}%'
+        AND table_name LIKE '%{project_id.replace("-", "_")}%'
         """
         result = connection.run(query=table_query)
         initial_table_count = len(result.data)
-        assert (
-            initial_table_count > 0
-        ), "Should have created some tables for this project"
+        assert initial_table_count > 0, (
+            "Should have created some tables for this project"
+        )
 
         # Test the cleanup process
         operations_handler.delete_tsdb_resources()
@@ -727,9 +727,9 @@ class TestTimescaleDBOperationsManagerIntegration:
         # Verify resources are cleaned up - check project-specific tables
         result_after = connection.run(query=table_query)
         final_table_count = len(result_after.data)
-        assert (
-            final_table_count == 0
-        ), f"All project tables should be deleted, but found {final_table_count} for project {project_id}"
+        assert final_table_count == 0, (
+            f"All project tables should be deleted, but found {final_table_count} for project {project_id}"
+        )
 
     def test_schema_cleanup_edge_cases(self, query_test_helper):
         """Test edge cases in schema and resource cleanup."""
@@ -754,12 +754,12 @@ class TestTimescaleDBOperationsManagerIntegration:
         table_query = f"""
         SELECT table_name FROM information_schema.tables
         WHERE table_schema = '{schema_name}' AND table_type = 'BASE TABLE'
-        AND table_name LIKE '%{project_id.replace('-', '_')}%'
+        AND table_name LIKE '%{project_id.replace("-", "_")}%'
         """
         result = connection.run(query=table_query)
-        assert (
-            len(result.data) == 0
-        ), "Should have no tables after cleanup for this project"
+        assert len(result.data) == 0, (
+            "Should have no tables after cleanup for this project"
+        )
 
 
 if __name__ == "__main__":
